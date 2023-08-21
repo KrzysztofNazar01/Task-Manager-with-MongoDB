@@ -1,10 +1,13 @@
-# Flask MongoDB CRUD APP
+# Task Manager with MongoDB
+## The goal of the project
+
+The goal of the project was to implement Flask web application which is a tool to manage task and save them in a database.
+The manager allows performing CRUD operations on tasks, and displays them in user-friendly way.
+This project is based on this [YouTube tutorial](https://www.youtube.com/playlist?list=PLU7aW4OZeUzwN0TsZLZUuzhc0f7OVVBcT).
 
 ## Project Setup
 
-1. Create main (`flaskMongoDB`) project folder
-
-2. create virtual environment inside it(main project folder)
+1. Create virtual environment
 
 ```bash
 #Linux and Mac
@@ -14,7 +17,7 @@ python -m venv venv
 python -m venv c:\path\to\myenv
 ```
 
-3. Activate the virtual environment
+2. Activate the virtual environment
 
 ```bash
 #Linux and Mac
@@ -24,7 +27,7 @@ source venv/bin/activate
 \venv\Scripts\activate.bat
 ```
 
-4. Install all project dependencies
+3. Install project dependencies
 
 ```bash
 pip install flask Flask-PyMongo Flask-WTF
@@ -32,44 +35,15 @@ pip install flask Flask-PyMongo Flask-WTF
 python -m pip install "pymongo[srv]
 ```
 
-5. Setup the mongoDB cluster
+4. Set up the mongoDB cluster
 
-## Project Structure
+Firstly, [sign up for MongoDB cloud](https://account.mongodb.com/account/login).
+Then, follow [this tutorial](https://nixfaq.org/2021/10/how-to-connect-python-flask-with-mongodb.html).
 
-```
-project_root_dir
-│
-|
-|
-|__ application
-|    |
-|    |__ templates
-|    |__ __init__.py
-|    |__ routes.py
-|    |__ forms.py
-|
-|
-|__ venv
-|
-|
-|
-|__ README.md
-|
-|
-|__ run.py
-```
+# What I learned during this project?
 
-# Tutorial Phases
-
-1. Simple Hello world app
-2. Setup database connection [Sign Up For mongoDB cloud](https://account.mongodb.com/account/login)
-3. Setup __init__.py file (project configurations)
-4. Setup base template
-5. Setup view_todos.html file
-6. Create Flask forms
-7. Create insert
-8. Implement Sweet alerts
-9. Create retrieve
-10. Implement delete
-11. Implement update functionality
-12. Setup .gitignore file
+- Setting up database connection using [mongoDB cloud](https://account.mongodb.com/account/login)
+- Setting up __init__.py file (project configurations)
+- Creating Flask forms
+- Using AJAX queries to update objects in the database
+- Implement user-friendly alerts
