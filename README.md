@@ -5,6 +5,11 @@ The goal of the project was to implement Flask web application which is a tool t
 The manager allows performing CRUD operations on tasks, and displays them in user-friendly way.
 This project is based on this [YouTube tutorial](https://www.youtube.com/playlist?list=PLU7aW4OZeUzwN0TsZLZUuzhc0f7OVVBcT).
 
+[//]: # (## Live demo)
+
+[//]: # (Use [**this link**]&#40;https://taskmanagerbykn.pythonanywhere.com/&#41; to check the demo of this application hosted by [Pythonanywhere.com]&#40;https://pythonanywhere.com&#41;.)
+
+
 ## Project Setup
 
 1. Create virtual environment
@@ -43,7 +48,8 @@ Then, follow [this tutorial](https://nixfaq.org/2021/10/how-to-connect-python-fl
 # What I learned during this project?
 
 - Setting up database connection using [mongoDB cloud](https://account.mongodb.com/account/login)
-- Setting up __init__.py file (project configurations)
-- Creating Flask forms
+- Creating Flask forms using [Flask-WTF extension](https://python-adv-web-apps.readthedocs.io/en/latest/flask_forms.html)
 - Using AJAX queries to update objects in the database
-- Implement user-friendly alerts
+- Implement user-friendly alerts using [Flash](https://flask.palletsprojects.com/en/1.1.x/patterns/flashing/)
+- Creating a calendar using [FullCalendar](https://fullcalendar.io/)
+- Setting up __init__.py file with project configurations
