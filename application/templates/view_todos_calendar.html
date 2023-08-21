@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div id="calendar"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth', // Display mode
+            events: [
+                {% for todo in todos %}
+                {
+                    title: '{{ todo.name }}',
+                    start: '{{ todo.due_date.strftime('%Y-%m-%d') }}', // Format due_date as 'YYYY-MM-DD'
+                    editable: true,
+                    data_id: '{{ todo._id }}', // Add the unique identifier using data_id
+                },
+                {% endfor %}
+          ],
+        eventClick: function(info) {
+                // Redirect to the update page for the specific task
+                var taskId = info.event.extendedProps.data_id;
+                window.location.href = 'update_todo/' + taskId;
+            }
+        });
+        calendar.render();
+    });
+</script>
+
+
+{% endblock %}
