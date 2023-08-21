@@ -1,12 +1,11 @@
-from application import app
-from flask import render_template, request, redirect, flash
-
-from bson import ObjectId
-
 from .forms import TodoForm
 from .db_queries import *
 from application import db
-from datetime import datetime
+from application import app
+from flask import jsonify, render_template, request, redirect, flash
+from datetime import datetime, timedelta
+from dateutil import parser
+from bson import ObjectId
 
 
 @app.route("/")
@@ -87,3 +86,17 @@ def calendar():
     return render_template('view_todos_calendar.html', todos=todos)
 
 
+@app.route('/update_task_due_date', methods=['POST'])
+def update_task_due_date():
+    data = request.get_json()
+    task_id = data.get('task_id')
+    new_due_date_str = data.get('new_due_date')
+    new_due_date = parser.isoparse(new_due_date_str).date()
+    # Convert the datetime.date to datetime.datetime
+    new_due_date_datetime = datetime.combine(new_due_date, datetime.min.time()) + timedelta(days=1)
+
+    db.todos_flask.find_one_and_update({"_id": ObjectId(task_id)}, {"$set": {
+        "due_date": new_due_date_datetime,
+    }})
+
+    return jsonify({"message": "Task due date updated successfully"})

@@ -4,6 +4,31 @@
 <div id="calendar"></div>
 
 <script>
+    function updateTaskDueDate(taskId, newDueDate) {
+        // Prepare the data to send in the request
+        var data = {
+            task_id: taskId,
+            new_due_date: newDueDate,
+        };
+        console.log(newDueDate);
+
+        // Make an AJAX request using the fetch API
+        fetch('/update_task_due_date', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Task due date updated:', data);
+        })
+        .catch(error => {
+            console.error('Error updating task due date:', error);
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -11,22 +36,31 @@
             events: [
                 {% for todo in todos %}
                 {
+                    data_id: '{{ todo._id }}',
                     title: '{{ todo.name }}',
-                    start: '{{ todo.due_date.strftime('%Y-%m-%d') }}', // Format due_date as 'YYYY-MM-DD'
+                    start: '{{ todo.due_date.strftime('%Y-%m-%d') }}',
                     editable: true,
-                    data_id: '{{ todo._id }}', // Add the unique identifier using data_id
+                    droppable: true,
                 },
                 {% endfor %}
-          ],
-        eventClick: function(info) {
+            ],
+            eventClick: function(info) {
                 // Redirect to the update page for the specific task
                 var taskId = info.event.extendedProps.data_id;
                 window.location.href = 'update_todo/' + taskId;
+            },
+            eventDrop: function(info) {
+                var newDueDate = info.event.start;
+                var taskId = info.event.extendedProps.data_id;
+
+                // Send a request to update the due date of the task in your backend
+                updateTaskDueDate(taskId, newDueDate);
             }
         });
         calendar.render();
     });
 </script>
+
 
 
 {% endblock %}
